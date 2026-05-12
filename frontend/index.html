@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gimnasio App - Local</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+    
+    <div class="container">
+        <header class="glass-panel header">
+            <h1>Gimnasio Pro</h1>
+            <div class="tabs">
+                <button id="btnTabOwner" class="tab-btn active">Panel Dueño</button>
+                <button id="btnTabClient" class="tab-btn">Portal Cliente</button>
+            </div>
+        </header>
+
+        <!-- PANEL DUEÑO -->
+        <main id="viewOwner" class="dashboard view active">
+            <div class="glass-panel card">
+                <h2>Caja Registradora</h2>
+                <div class="finance-box">
+                    <div>
+                        <p>Ventas Hoy</p>
+                        <h3 id="cajaHoy">$0.00</h3>
+                    </div>
+                    <div>
+                        <button class="primary-btn" onclick="cargarCaja()">Actualizar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel card">
+                <h2>Vender Membresía</h2>
+                <form id="formVenta" class="form-layout">
+                    <input type="number" id="vIdCliente" placeholder="ID Cliente" required>
+                    <input type="number" id="vIdMembresia" placeholder="ID Membresía (Ej: 1)" required>
+                    <button type="submit" class="primary-btn success-btn">Vender (+30 días)</button>
+                </form>
+                <p id="ventaMsg" class="msg"></p>
+            </div>
+
+            <div class="glass-panel card full-width">
+                <h2>Gestión de Rutinas</h2>
+                <form id="formRutina" class="form-layout horizontal">
+                    <input type="text" id="rNombre" placeholder="Nombre Rutina" required>
+                    <input type="text" id="rDesc" placeholder="Descripción" required>
+                    <button type="submit" class="primary-btn">Crear</button>
+                </form>
+                <ul id="listaRutinasAdmin" class="list-container">
+                    <!-- Dinámico -->
+                </ul>
+            </div>
+        </main>
+        
+        <!-- PANEL CLIENTE -->
+        <main id="viewClient" class="dashboard view" style="display:none;">
+            <div class="glass-panel card">
+                <h2>Mi Membresía</h2>
+                <p>Ingresa tu ID para consultar tu estado</p>
+                <form id="formConsulta" class="form-layout">
+                    <input type="number" id="cIdCliente" placeholder="Mi ID de Cliente" required>
+                    <button type="submit" class="primary-btn">Consultar</button>
+                </form>
+                <div id="resultadoConsulta" class="result-box" style="display:none;">
+                    <h3 id="cEstado">ESTADO</h3>
+                    <p><strong id="cDias">0</strong> días restantes</p>
+                </div>
+            </div>
+
+            <div class="glass-panel card full-width">
+                <h2>Rutinas Disponibles</h2>
+                <ul id="listaRutinasCliente" class="list-container">
+                    <!-- Dinámico -->
+                </ul>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>Proyecto Final Asys &copy; 2026</p>
+        </footer>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
