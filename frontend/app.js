@@ -28,21 +28,73 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (e) { console.error('Error cargando caja', e); }
     };
 
-    // --- DUEÑO: Vender Membresía ---
+    // --- DUEÑO: Vender Membresía (Con Autocompletado) ---
+    const inputNombre = document.getElementById('vNombreCliente');
+    const inputDoc = document.getElementById('vDocCliente');
+    const autocompleteList = document.getElementById('autocomplete-list');
+    let timer;
+
+    inputNombre.addEventListener('input', function() {
+        clearTimeout(timer);
+        const val = this.value;
+        autocompleteList.innerHTML = '';
+        if (!val) return;
+        
+        timer = setTimeout(async () => {
+            try {
+                const res = await fetch(`${API_URL}/clientes/buscar?nombre=${val}`);
+                const clientes = await res.json();
+                
+                clientes.forEach(c => {
+                    const li = document.createElement('li');
+                    li.textContent = `${c.nombre} (Doc: ${c.documento})`;
+                    li.addEventListener('click', () => {
+                        inputNombre.value = c.nombre;
+                        inputDoc.value = c.documento;
+                        autocompleteList.innerHTML = '';
+                    });
+                    autocompleteList.appendChild(li);
+                });
+            } catch(e) { console.error(e); }
+        }, 300); // 300ms debounce
+    });
+
+    // Cerrar lista si hace clic fuera
+    document.addEventListener('click', function (e) {
+        if (e.target !== inputNombre) {
+            autocompleteList.innerHTML = '';
+        }
+    });
+
     document.getElementById('formVenta').addEventListener('submit', async (e) => {
         e.preventDefault();
-        const idCliente = document.getElementById('vIdCliente').value;
-        const idMembresia = document.getElementById('vIdMembresia').value;
         const msg = document.getElementById('ventaMsg');
+        
+        const payload = {
+            nombreCliente: inputNombre.value,
+            documentoCliente: inputDoc.value,
+            idMembresia: parseInt(document.getElementById('vIdMembresia').value),
+            meses: parseInt(document.getElementById('vMeses').value),
+            metodoPago: document.getElementById('vMetodoPago').value
+        };
 
         try {
-            const res = await fetch(`${API_URL}/membresias/comprar?idCliente=${idCliente}&idMembresia=${idMembresia}`, { method: 'POST' });
+            const res = await fetch(`${API_URL}/membresias/comprar`, { 
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
             if(res.ok) {
-                msg.textContent = '¡Venta registrada con éxito!'; msg.className = 'msg success';
-                cargarCaja(); // Actualiza caja automáticamente
+                const data = await res.json();
+                msg.textContent = `¡Venta registrada! Expira el ${data.fechaFin}`; 
+                msg.className = 'msg success';
+                
+                // Limpiar form
+                document.getElementById('formVenta').reset();
+                cargarCaja(); // Actualiza caja
             } else { throw new Error(); }
         } catch (error) {
-            msg.textContent = 'Error: Verifica los IDs'; msg.className = 'msg error';
+            msg.textContent = 'Error al registrar la venta.'; msg.className = 'msg error';
         }
     });
 

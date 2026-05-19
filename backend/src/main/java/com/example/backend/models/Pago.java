@@ -22,6 +22,9 @@ public class Pago {
     @Column(name = "fecha")
     private LocalDate fecha;
 
+    @Column(name = "metodo_pago", length = 50)
+    private String metodoPago;
+
     public Pago() {}
 
     public Integer getIdPago() { return idPago; }
@@ -32,4 +35,6 @@ public class Pago {
     public void setMonto(Double monto) { this.monto = monto; }
     public LocalDate getFecha() { return fecha; }
     public void setFecha(LocalDate fecha) { this.fecha = fecha; }
+    public String getMetodoPago() { return metodoPago; }
+    public void setMetodoPago(String metodoPago) { this.metodoPago = metodoPago; }
 }

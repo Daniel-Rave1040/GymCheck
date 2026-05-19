@@ -17,6 +17,10 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
+    public List<Cliente> buscarPorNombre(String nombre) {
+        return clienteRepository.findByNombreContainingIgnoreCase(nombre);
+    }
+
     public Cliente save(Cliente cliente) {
         return clienteRepository.save(cliente);
     }

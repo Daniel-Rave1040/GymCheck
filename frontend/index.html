@@ -41,9 +41,37 @@
             <div class="glass-panel card">
                 <h2>Vender Membresía</h2>
                 <form id="formVenta" class="form-layout">
-                    <input type="number" id="vIdCliente" placeholder="ID Cliente" required>
-                    <input type="number" id="vIdMembresia" placeholder="ID Membresía (Ej: 1)" required>
-                    <button type="submit" class="primary-btn success-btn">Vender (+30 días)</button>
+                    <!-- Buscador / Creación de Cliente -->
+                    <div style="position: relative;">
+                        <input type="text" id="vNombreCliente" placeholder="Nombre del Cliente (Buscar o Nuevo)" required autocomplete="off">
+                        <ul id="autocomplete-list" class="autocomplete-items"></ul>
+                    </div>
+                    <input type="number" id="vDocCliente" placeholder="Documento (Obligatorio para nuevos)" required>
+                    
+                    <!-- Membresía, Meses y Método de Pago -->
+                    <select id="vIdMembresia" required>
+                        <option value="" disabled selected>Selecciona Membresía</option>
+                        <option value="1">Básico ($80.000)</option>
+                        <option value="2">Semi-Pro ($120.000)</option>
+                        <option value="3">Premium ($150.000)</option>
+                    </select>
+                    
+                    <select id="vMeses" required>
+                        <option value="1">1 Mes (+30 días)</option>
+                        <option value="2">2 Meses (+60 días)</option>
+                        <option value="3">3 Meses (+90 días)</option>
+                        <option value="6">6 Meses (+180 días)</option>
+                        <option value="12">12 Meses (+360 días)</option>
+                    </select>
+
+                    <select id="vMetodoPago" required>
+                        <option value="" disabled selected>Método de Pago</option>
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Tarjeta">Tarjeta</option>
+                        <option value="Transferencia">Transferencia</option>
+                    </select>
+
+                    <button type="submit" class="primary-btn success-btn">Registrar Venta</button>
                 </form>
                 <p id="ventaMsg" class="msg"></p>
             </div>

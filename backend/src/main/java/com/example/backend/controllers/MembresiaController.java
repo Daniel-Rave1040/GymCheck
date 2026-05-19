@@ -2,6 +2,7 @@ package com.example.backend.controllers;
 
 import com.example.backend.models.ClienteMembresia;
 import com.example.backend.services.MembresiaService;
+import com.example.backend.dto.VentaMembresiaRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +18,8 @@ public class MembresiaController {
     private MembresiaService membresiaService;
 
     @PostMapping("/comprar")
-    public ClienteMembresia comprarMembresia(@RequestParam Integer idCliente, @RequestParam Integer idMembresia) {
-        return membresiaService.comprarMembresia(idCliente, idMembresia);
+    public ClienteMembresia comprarMembresia(@RequestBody VentaMembresiaRequest request) {
+        return membresiaService.comprarMembresia(request);
     }
 
     @GetMapping("/cliente/{idCliente}/dias")

@@ -20,6 +20,11 @@ public class ClienteController {
         return clienteService.findAll();
     }
 
+    @GetMapping("/buscar")
+    public List<Cliente> buscarPorNombre(@RequestParam String nombre) {
+        return clienteService.buscarPorNombre(nombre);
+    }
+
     @PostMapping
     public Cliente create(@RequestBody Cliente cliente) {
         return clienteService.save(cliente);

@@ -20,10 +20,22 @@ public class Ciudad {
 
     public Ciudad() {}
 
-    public Integer getIdCiudad() { return idCiudad; }
-    public void setIdCiudad(Integer idCiudad) { this.idCiudad = idCiudad; }
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
-    public Pais getPais() { return pais; }
-    public void setPais(Pais pais) { this.pais = pais; }
+    public Integer getIdCiudad() {
+         return idCiudad;
+    }
+    public void setIdCiudad(Integer idCiudad) {
+         this.idCiudad = idCiudad; 
+    }
+    public String getNombre() {
+         return nombre; 
+    }
+    public void setNombre(String nombre) {
+         this.nombre = nombre; 
+    }
+    public Pais getPais() {
+         return pais;
+    }
+    public void setPais(Pais pais) {
+         this.pais = pais; 
+    }
 }
