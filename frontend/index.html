@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,14 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="background-shapes">
         <div class="shape shape-1"></div>
         <div class="shape shape-2"></div>
         <div class="shape shape-3"></div>
     </div>
-    
+
     <div class="container">
         <header class="glass-panel header">
             <h1>Gimnasio Pro</h1>
@@ -43,19 +45,17 @@
                 <form id="formVenta" class="form-layout">
                     <!-- Buscador / Creación de Cliente -->
                     <div style="position: relative;">
-                        <input type="text" id="vNombreCliente" placeholder="Nombre del Cliente (Buscar o Nuevo)" required autocomplete="off">
+                        <input type="text" id="vNombreCliente" placeholder="Nombre del Cliente (Buscar o Nuevo)"
+                            required autocomplete="off">
                         <ul id="autocomplete-list" class="autocomplete-items"></ul>
                     </div>
                     <input type="number" id="vDocCliente" placeholder="Documento (Obligatorio para nuevos)" required>
-                    
+
                     <!-- Membresía, Meses y Método de Pago -->
                     <select id="vIdMembresia" required>
-                        <option value="" disabled selected>Selecciona Membresía</option>
-                        <option value="1">Básico ($80.000)</option>
-                        <option value="2">Semi-Pro ($120.000)</option>
-                        <option value="3">Premium ($150.000)</option>
+                        <option value="" disabled selected>Cargando membresías...</option>
                     </select>
-                    
+
                     <select id="vMeses" required>
                         <option value="1">1 Mes (+30 días)</option>
                         <option value="2">2 Meses (+60 días)</option>
@@ -76,6 +76,60 @@
                 <p id="ventaMsg" class="msg"></p>
             </div>
 
+            <div class="glass-panel card">
+                <h2>Gestión de Sedes</h2>
+                <div class="sedes-container">
+                    <form id="formSede" class="form-layout">
+                        <div class="form-group-row">
+                            <input type="text" id="sNombre" placeholder="Nombre de la Sede" required>
+                            <input type="text" id="sDireccion" placeholder="Dirección" required>
+                        </div>
+
+                        <div class="form-group-row flex-select-group">
+                            <div class="select-with-add">
+                                <select id="sPais" required>
+                                    <option value="" disabled selected>Selecciona País</option>
+                                    <!-- Dinámico -->
+                                </select>
+                                <button type="button" class="primary-btn add-inline-btn" id="btnToggleNuevoPais"
+                                    title="Agregar País">+</button>
+                            </div>
+
+                            <div class="select-with-add">
+                                <select id="sCiudad" required disabled>
+                                    <option value="" disabled selected>Selecciona Ciudad (Elige País primero)</option>
+                                    <!-- Dinámico -->
+                                </select>
+                                <button type="button" class="primary-btn add-inline-btn" id="btnToggleNuevaCiudad"
+                                    title="Agregar Ciudad" disabled>+</button>
+                            </div>
+                        </div>
+
+                        <!-- Formularios rápidos inline para País y Ciudad (ocultos por defecto) -->
+                        <div id="quickAddPais" class="quick-add-box" style="display: none;">
+                            <input type="text" id="nuevoPaisNombre" placeholder="Nombre del nuevo País">
+                            <button type="button" class="primary-btn success-btn" id="btnGuardarPais">Guardar
+                                País</button>
+                        </div>
+
+                        <div id="quickAddCiudad" class="quick-add-box" style="display: none;">
+                            <input type="text" id="nuevoCiudadNombre" placeholder="Nombre de la nueva Ciudad">
+                            <button type="button" class="primary-btn success-btn" id="btnGuardarCiudad">Guardar
+                                Ciudad</button>
+                        </div>
+
+                        <button type="submit" class="primary-btn success-btn">Registrar Sede</button>
+                    </form>
+
+                    <p id="sedeMsg" class="msg"></p>
+
+                    <!-- Listado de sedes -->
+                    <ul id="listaSedesAdmin" class="list-container">
+                        <!-- Dinámico -->
+                    </ul>
+                </div>
+            </div>
+
             <div class="glass-panel card full-width">
                 <h2>Gestión de Rutinas</h2>
                 <form id="formRutina" class="form-layout horizontal">
@@ -88,7 +142,7 @@
                 </ul>
             </div>
         </main>
-        
+
         <!-- PANEL CLIENTE -->
         <main id="viewClient" class="dashboard view" style="display:none;">
             <div class="glass-panel card">
@@ -111,12 +165,13 @@
                 </ul>
             </div>
         </main>
-        
+
         <footer class="footer">
             <p>Proyecto Final Asys &copy; 2026</p>
         </footer>
     </div>
-    
+
     <script src="app.js"></script>
 </body>
+
 </html>

@@ -1,6 +1,7 @@
 package com.example.backend.controllers;
 
 import com.example.backend.models.ClienteMembresia;
+import com.example.backend.models.Membresia;
 import com.example.backend.services.MembresiaService;
 import com.example.backend.dto.VentaMembresiaRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/membresias")
@@ -16,6 +18,11 @@ public class MembresiaController {
 
     @Autowired
     private MembresiaService membresiaService;
+
+    @GetMapping
+    public List<Membresia> getAll() {
+        return membresiaService.findAll();
+    }
 
     @PostMapping("/comprar")
     public ClienteMembresia comprarMembresia(@RequestBody VentaMembresiaRequest request) {
@@ -28,7 +35,7 @@ public class MembresiaController {
         Map<String, Object> response = new HashMap<>();
         response.put("idCliente", idCliente);
         response.put("diasRestantes", dias);
-        if(dias > 0) {
+        if (dias > 0) {
             response.put("estado", "ACTIVO");
         } else {
             response.put("estado", "VENCIDO");

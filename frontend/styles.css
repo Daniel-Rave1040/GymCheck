@@ -105,3 +105,57 @@ body {
 .autocomplete-items li:hover {
     background-color: var(--primary);
 }
+
+/* Sede Management Styles */
+.form-group-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.form-group-row input, .form-group-row select {
+    flex: 1;
+    min-width: 200px;
+}
+.flex-select-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.select-with-add {
+    display: flex;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 200px;
+    align-items: center;
+}
+.select-with-add select {
+    flex-grow: 1;
+}
+.add-inline-btn {
+    padding: 0.75rem 1rem !important;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.quick-add-box {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px dashed var(--glass-border);
+    margin-top: 0.5rem;
+    align-items: center;
+}
+.quick-add-box input {
+    flex-grow: 1;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid var(--glass-border);
+    background: rgba(0,0,0,0.3);
+    color: white;
+}
+

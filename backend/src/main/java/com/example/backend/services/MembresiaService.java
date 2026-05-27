@@ -11,6 +11,7 @@ import com.example.backend.repositories.MembresiaRepository;
 import com.example.backend.repositories.PagoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -31,6 +32,7 @@ public class MembresiaService {
     @Autowired
     private PagoRepository pagoRepository;
 
+    @Transactional
     public ClienteMembresia comprarMembresia(VentaMembresiaRequest request) {
         // 1. Buscar o Crear Cliente
         Cliente cliente = null;
@@ -99,5 +101,9 @@ public class MembresiaService {
         }
         
         return ChronoUnit.DAYS.between(hoy, actual.getFechaFin());
+    }
+
+    public List<Membresia> findAll() {
+        return membresiaRepository.findAll();
     }
 }
