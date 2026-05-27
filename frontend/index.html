@@ -27,16 +27,47 @@
 
         <!-- PANEL DUEÑO -->
         <main id="viewOwner" class="dashboard view active">
-            <div class="glass-panel card">
+        <div class="glass-panel card full-width">
                 <h2>Caja Registradora</h2>
-                <div class="finance-box">
-                    <div>
-                        <p>Ventas Hoy</p>
-                        <h3 id="cajaHoy">$0.00</h3>
+                <div class="caja-grid">
+                    <!-- Totales de ventas -->
+                    <div class="caja-stat">
+                        <p class="caja-label">Ventas Hoy</p>
+                        <h3 id="cajaHoy" class="caja-valor">$0</h3>
                     </div>
-                    <div>
-                        <button class="primary-btn" onclick="cargarCaja()">Actualizar</button>
+                    <div class="caja-stat">
+                        <p class="caja-label">Ventas Semana</p>
+                        <h3 id="cajaSemana" class="caja-valor">$0</h3>
                     </div>
+                    <div class="caja-stat">
+                        <p class="caja-label">Ventas Mes</p>
+                        <h3 id="cajaMes" class="caja-valor">$0</h3>
+                    </div>
+                    <!-- Conteo por método de pago (del mes) -->
+                    <div class="caja-stat metodo-stat">
+                        <span class="metodo-icono">💵</span>
+                        <div>
+                            <p class="caja-label">Efectivo</p>
+                            <h3 id="conteoEfectivo" class="caja-valor-sm">0 pagos</h3>
+                        </div>
+                    </div>
+                    <div class="caja-stat metodo-stat">
+                        <span class="metodo-icono">💳</span>
+                        <div>
+                            <p class="caja-label">Tarjeta</p>
+                            <h3 id="conteoTarjeta" class="caja-valor-sm">0 pagos</h3>
+                        </div>
+                    </div>
+                    <div class="caja-stat metodo-stat">
+                        <span class="metodo-icono">📲</span>
+                        <div>
+                            <p class="caja-label">Transferencia</p>
+                            <h3 id="conteoTransferencia" class="caja-valor-sm">0 pagos</h3>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align:right; margin-top: 0.5rem;">
+                    <button class="primary-btn" onclick="cargarCaja()">Actualizar</button>
                 </div>
             </div>
 

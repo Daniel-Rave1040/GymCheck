@@ -22,9 +22,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- DUEÑO: Caja ---
     window.cargarCaja = async () => {
         try {
-            const res = await fetch(`${API_URL}/pagos/caja/hoy`);
+            const res = await fetch(`${API_URL}/pagos/caja/resumen`);
             const data = await res.json();
-            document.getElementById('cajaHoy').textContent = `$${data.totalVentas || 0}`;
+
+            const fmt = v => `$${Number(v || 0).toLocaleString('es-CO')}`;
+
+            document.getElementById('cajaHoy').textContent    = fmt(data.totalHoy);
+            document.getElementById('cajaSemana').textContent = fmt(data.totalSemana);
+            document.getElementById('cajaMes').textContent    = fmt(data.totalMes);
+
+            const m = data.conteoMetodos || {};
+            document.getElementById('conteoEfectivo').textContent     = `${m.Efectivo     || 0} pagos`;
+            document.getElementById('conteoTarjeta').textContent      = `${m.Tarjeta      || 0} pagos`;
+            document.getElementById('conteoTransferencia').textContent = `${m.Transferencia || 0} pagos`;
         } catch (e) { console.error('Error cargando caja', e); }
     };
 

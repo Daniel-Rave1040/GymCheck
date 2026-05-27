@@ -34,4 +34,9 @@ public class PagoController {
         response.put("totalVentas", total);
         return response;
     }
+
+    @GetMapping("/caja/resumen")
+    public Map<String, Object> obtenerResumen() {
+        return pagoService.obtenerResumenCompleto();
+    }
 }
