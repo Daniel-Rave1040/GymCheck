@@ -1,7 +1,7 @@
 package com.example.backend.controllers;
 
-import com.example.backend.models.Cliente;
-import com.example.backend.services.ClienteService;
+import com.example.backend.entidades.Cliente;
+import com.example.backend.servicios.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

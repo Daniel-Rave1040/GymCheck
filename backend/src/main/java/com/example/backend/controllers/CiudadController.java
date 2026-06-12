@@ -1,7 +1,7 @@
 package com.example.backend.controllers;
 
-import com.example.backend.models.Ciudad;
-import com.example.backend.services.CiudadService;
+import com.example.backend.entidades.Ciudad;
+import com.example.backend.servicios.CiudadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gimnasio App - Local</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <div class="container">
+        <header class="glass-panel header">
+            <h1>Gym check</h1>
+            <div class="tabs">
+                <button id="btnTabOwner" class="tab-btn active">Panel Dueño</button>
+                <button id="btnTabClient" class="tab-btn">Portal Cliente</button>
+            </div>
+        </header>
+
+        <!-- PANEL DUEÑO -->
+        <main id="viewOwner" class="dashboard view active">
+            <div class="glass-panel card full-width">
+                <h2>Caja Registradora</h2>
+                <div class="caja-grid">
+                    <div class="caja-stat">
+                        <p class="caja-label">Ventas Hoy</p>
+                        <h3 id="cajaHoy" class="caja-valor">$0</h3>
+                    </div>
+                    <div class="caja-stat">
+                        <p class="caja-label">Ventas Semana</p>
+                        <h3 id="cajaSemana" class="caja-valor">$0</h3>
+                    </div>
+                    <div class="caja-stat">
+                        <p class="caja-label">Ventas Mes</p>
+                        <h3 id="cajaMes" class="caja-valor">$0</h3>
+                    </div>
+                    <div class="caja-stat metodo-stat">
+                        <span class="metodo-icono">💵</span>
+                        <div>
+                            <p class="caja-label">Efectivo</p>
+                            <h3 id="conteoEfectivo" class="caja-valor-sm">0 pagos</h3>
+                        </div>
+                    </div>
+                    <div class="caja-stat metodo-stat">
+                        <span class="metodo-icono">💳</span>
+                        <div>
+                            <p class="caja-label">Tarjeta</p>
+                            <h3 id="conteoTarjeta" class="caja-valor-sm">0 pagos</h3>
+                        </div>
+                    </div>
+                    <div class="caja-stat metodo-stat">
+                        <span class="metodo-icono">📲</span>
+                        <div>
+                            <p class="caja-label">Transferencia</p>
+                            <h3 id="conteoTransferencia" class="caja-valor-sm">0 pagos</h3>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align:right; margin-top: 0.5rem;">
+                    <button class="primary-btn" onclick="cargarCaja()">Actualizar</button>
+                </div>
+            </div>
+
+            <div class="glass-panel card">
+                <h2>Vender Membresía</h2>
+                <form id="formVenta" class="form-layout">
+                    <div style="position: relative;">
+                        <input type="text" id="vNombreCliente" placeholder="Nombre del Cliente (Buscar o Nuevo)"
+                            required autocomplete="off">
+                        <ul id="autocomplete-list" class="autocomplete-items"></ul>
+                    </div>
+                    <input type="number" id="vDocCliente" placeholder="Documento (Obligatorio para nuevos)" required>
+                    <select id="vIdMembresia" required>
+                        <option value="" disabled selected>Cargando membresías...</option>
+                    </select>
+                    <select id="vMeses" required>
+                        <option value="1">1 Mes (+30 días)</option>
+                        <option value="2">2 Meses (+60 días)</option>
+                        <option value="3">3 Meses (+90 días)</option>
+                        <option value="6">6 Meses (+180 días)</option>
+                        <option value="12">12 Meses (+360 días)</option>
+                    </select>
+                    <select id="vMetodoPago" required>
+                        <option value="" disabled selected>Método de Pago</option>
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Tarjeta">Tarjeta</option>
+                        <option value="Transferencia">Transferencia</option>
+                    </select>
+                    <button type="submit" class="primary-btn success-btn">Registrar Venta</button>
+                </form>
+                <p id="ventaMsg" class="msg"></p>
+            </div>
+
+            <div class="glass-panel card">
+                <h2>Contratar Entrenador</h2>
+                <form id="formEntrenador" class="form-layout">
+                    <input type="text" id="eNombre" placeholder="Nombre Completo" required>
+                    <input type="text" id="eEspecialidad" placeholder="Especialidad (ej. Musculación, Cardio)" required>
+                    <select id="eIdSede" required>
+                        <option value="" disabled selected>Selecciona Sede</option>
+                    </select>
+                    <button type="submit" class="primary-btn success-btn">Contratar Entrenador</button>
+                </form>
+                <p id="entrenadorMsg" class="msg"></p>
+                <ul id="listaEntrenadoresAdmin" class="list-container"></ul>
+            </div>
+
+            <div class="glass-panel card">
+                <h2>Gestión de Sedes</h2>
+                <div class="sedes-container">
+                    <form id="formSede" class="form-layout">
+                        <div class="form-group-row">
+                            <input type="text" id="sNombre" placeholder="Nombre de la Sede" required>
+                            <input type="text" id="sDireccion" placeholder="Dirección" required>
+                        </div>
+                        <div class="form-group-row flex-select-group">
+                            <div class="select-with-add">
+                                <select id="sPais" required>
+                                    <option value="" disabled selected>Selecciona País</option>
+                                </select>
+                                <button type="button" class="primary-btn add-inline-btn" id="btnToggleNuevoPais"
+                                    title="Agregar País">+</button>
+                            </div>
+                            <div class="select-with-add">
+                                <select id="sCiudad" required disabled>
+                                    <option value="" disabled selected>Selecciona Ciudad (Elige País primero)</option>
+                                </select>
+                                <button type="button" class="primary-btn add-inline-btn" id="btnToggleNuevaCiudad"
+                                    title="Agregar Ciudad" disabled>+</button>
+                            </div>
+                        </div>
+                        <div id="quickAddPais" class="quick-add-box" style="display: none;">
+                            <input type="text" id="nuevoPaisNombre" placeholder="Nombre del nuevo País">
+                            <button type="button" class="primary-btn success-btn" id="btnGuardarPais">Guardar
+                                País</button>
+                        </div>
+                        <div id="quickAddCiudad" class="quick-add-box" style="display: none;">
+                            <input type="text" id="nuevoCiudadNombre" placeholder="Nombre de la nueva Ciudad">
+                            <button type="button" class="primary-btn success-btn" id="btnGuardarCiudad">Guardar
+                                Ciudad</button>
+                        </div>
+                        <button type="submit" class="primary-btn success-btn">Registrar Sede</button>
+                    </form>
+                    <p id="sedeMsg" class="msg"></p>
+                    <ul id="listaSedesAdmin" class="list-container"></ul>
+                </div>
+            </div>
+
+            <div class="glass-panel card full-width">
+                <h2>Gestión de Rutinas</h2>
+                <form id="formRutina" class="form-layout horizontal">
+                    <input type="text" id="rNombre" placeholder="Nombre Rutina" required>
+                    <input type="text" id="rDesc" placeholder="Descripción" required>
+                    <button type="submit" class="primary-btn">Crear</button>
+                </form>
+                <ul id="listaRutinasAdmin" class="list-container"></ul>
+            </div>
+        </main>
+
+        <!-- PANEL CLIENTE -->
+        <main id="viewClient" class="dashboard view" style="display:none;">
+
+            <!-- Fila superior: Consulta + Membresías -->
+            <div class="glass-panel card">
+                <h2>Mi Membresía</h2>
+                <p>Ingresa tu cédula para consultar tu estado</p>
+                <form id="formConsulta" class="form-layout">
+                    <!-- ✅ Cambiado: type="text", placeholder y id actualizados -->
+                    <input type="text" id="cDocumentoCliente" placeholder="Mi número de cédula" required>
+                    <button type="submit" class="primary-btn">Consultar</button>
+                </form>
+                <div id="resultadoConsulta" class="result-box" style="display:none;">
+                    <h3 id="cEstado">ESTADO</h3>
+                    <p><strong id="cDias">0</strong> días restantes</p>
+                </div>
+            </div>
+
+            <!-- ✅ Nueva tarjeta: Planes y beneficios -->
+            <div class="glass-panel card">
+                <h2>Nuestros Planes</h2>
+                <div class="planes-grid">
+                    <div class="plan-card plan-basico">
+                        <div class="plan-header">
+                            <span class="plan-icono">🥉</span>
+                            <h3>Básico</h3>
+                        </div>
+                        <ul class="plan-beneficios">
+                            <li>✅ Acceso a sala de pesas</li>
+                            <li>✅ Rutinas guiadas</li>
+                            <li>✅ Vestuarios</li>
+                            <li>❌ Clases grupales</li>
+                            <li>❌ Entrenador personal</li>
+                        </ul>
+                    </div>
+                    <div class="plan-card plan-estandar">
+                        <div class="plan-header">
+                            <span class="plan-icono">🥈</span>
+                            <h3>Estándar</h3>
+                        </div>
+                        <ul class="plan-beneficios">
+                            <li>✅ Acceso a sala de pesas</li>
+                            <li>✅ Rutinas guiadas</li>
+                            <li>✅ Vestuarios</li>
+                            <li>✅ Clases grupales</li>
+                            <li>❌ Entrenador personal</li>
+                        </ul>
+                    </div>
+                    <div class="plan-card plan-premium">
+                        <div class="plan-header">
+                            <span class="plan-icono">🥇</span>
+                            <h3>Premium</h3>
+                        </div>
+                        <ul class="plan-beneficios">
+                            <li>✅ Acceso a sala de pesas</li>
+                            <li>✅ Rutinas guiadas</li>
+                            <li>✅ Vestuarios</li>
+                            <li>✅ Clases grupales</li>
+                            <li>✅ Entrenador personal</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel card full-width">
+                <h2>Rutinas Disponibles</h2>
+                <ul id="listaRutinasCliente" class="list-container"></ul>
+            </div>
+
+            <div class="glass-panel card full-width">
+                <h2>Entrenadores Disponibles</h2>
+                <ul id="listaEntrenadoresCliente" class="list-container"></ul>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>Proyecto Final Asys &copy; 2026</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

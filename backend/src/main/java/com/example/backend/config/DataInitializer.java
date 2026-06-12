@@ -1,7 +1,7 @@
 package com.example.backend.config;
 
-import com.example.backend.models.Membresia;
-import com.example.backend.repositories.MembresiaRepository;
+import com.example.backend.entidades.Membresia;
+import com.example.backend.persistencia.MembresiaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,7 @@
 package com.example.backend.controllers;
 
-import com.example.backend.models.Pais;
-import com.example.backend.services.PaisService;
+import com.example.backend.entidades.Pais;
+import com.example.backend.servicios.PaisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

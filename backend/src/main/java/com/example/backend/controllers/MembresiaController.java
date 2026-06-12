@@ -1,10 +1,11 @@
 package com.example.backend.controllers;
 
-import com.example.backend.models.ClienteMembresia;
-import com.example.backend.models.Membresia;
-import com.example.backend.services.MembresiaService;
+import com.example.backend.entidades.ClienteMembresia;
+import com.example.backend.entidades.Membresia;
+import com.example.backend.servicios.MembresiaService;
 import com.example.backend.dto.VentaMembresiaRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -29,17 +30,19 @@ public class MembresiaController {
         return membresiaService.comprarMembresia(request);
     }
 
-    @GetMapping("/cliente/{idCliente}/dias")
-    public Map<String, Object> consultarDiasRestantes(@PathVariable Integer idCliente) {
-        long dias = membresiaService.calcularDiasRestantes(idCliente);
-        Map<String, Object> response = new HashMap<>();
-        response.put("idCliente", idCliente);
-        response.put("diasRestantes", dias);
-        if (dias > 0) {
-            response.put("estado", "ACTIVO");
-        } else {
-            response.put("estado", "VENCIDO");
+    @GetMapping("/cliente/documento/{documento}/dias")
+    public ResponseEntity<Map<String, Object>> consultarPorDocumento(@PathVariable String documento) {
+        long dias = membresiaService.calcularDiasRestantesPorDocumento(documento);
+
+        if (dias == -1) {
+            return ResponseEntity.status(404).body(Map.of(
+                    "error", "Cliente no encontrado"));
         }
-        return response;
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("documento", documento);
+        response.put("diasRestantes", dias);
+        response.put("estado", dias > 0 ? "ACTIVO" : "VENCIDO");
+        return ResponseEntity.ok(response);
     }
 }

@@ -1,7 +1,7 @@
 package com.example.backend.controllers;
 
-import com.example.backend.models.Rutina;
-import com.example.backend.services.RutinaService;
+import com.example.backend.entidades.Rutina;
+import com.example.backend.servicios.RutinaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

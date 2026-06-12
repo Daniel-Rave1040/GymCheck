@@ -1,7 +1,7 @@
 package com.example.backend.controllers;
 
-import com.example.backend.models.Entrenador;
-import com.example.backend.services.EntrenadorService;
+import com.example.backend.entidades.Entrenador;
+import com.example.backend.servicios.EntrenadorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
